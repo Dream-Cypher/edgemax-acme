@@ -73,9 +73,10 @@ if [ -e "/var/run/lighttpd.pid" ]; then
 fi
 
 log "Executing acme.sh."
+#added --server letsencrypt option.  also recommend running acme.sh --set-default-ca --server letsencrypt
 $ACMEHOME/acme.sh --issue $DNSARG $DOMAINARG --home $ACMEHOME \
     --keylength ec-384 --keypath /tmp/server.key --fullchainpath /tmp/full.cer \
-    --log /var/log/acme.log \
+    --server letsencrypt --log /var/log/acme.log \
     --reloadcmd /config/scripts/reload.acme.sh \
     $INSECURE_FLAG $VERBOSE_FLAG $@
 
